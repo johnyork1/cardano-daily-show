@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Episode 2025-02-05 | Blockchain Basics</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <a href="../../index.html" class="back-link">← All Episodes</a>
+
+  <div class="episode-container">
+    <header class="episode-header">
+      <h1>February 5, 2025</h1>
+      <p class="topic">Cardano TVL Hits $500M — What's Driving the Surge?</p>
+    </header>
+
+    <button class="open-all-btn" onclick="openAllTabs()">
+      ▶ Open All Tabs for Recording
+    </button>
+
+    <p style="text-align: center; color: #888; margin-bottom: 30px; font-size: 0.9rem;">
+      Or right-click each link → "Open in New Tab"
+    </p>
+
+    <ul class="tab-list">
+      <li class="tab-item">
+        <span class="tab-number">1</span>
+        <div class="tab-info">
+          <div class="tab-name">Title Card</div>
+          <div class="tab-highlight">3-second intro</div>
+        </div>
+        <a href="tabs/01-title-card.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">2</span>
+        <div class="tab-info">
+          <div class="tab-name">CoinGecko ADA</div>
+          <div class="tab-highlight">"ADA $0.72, up 4.3% in 24 hours"</div>
+        </div>
+        <a href="tabs/02-coingecko.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">3</span>
+        <div class="tab-info">
+          <div class="tab-name">TradingView ADA/USDT</div>
+          <div class="tab-highlight">"ascending channel since Tuesday"</div>
+        </div>
+        <a href="tabs/03-tradingview.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">4</span>
+        <div class="tab-info">
+          <div class="tab-name">DeFiLlama Cardano TVL</div>
+          <div class="tab-highlight">"TVL crossed $500M this week"</div>
+        </div>
+        <a href="tabs/04-defillama.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">5</span>
+        <div class="tab-info">
+          <div class="tab-name">CoinDesk Article</div>
+          <div class="tab-highlight">"Minswap leads with 35% of total TVL"</div>
+        </div>
+        <a href="tabs/05-article.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">6</span>
+        <div class="tab-info">
+          <div class="tab-name">Minswap Dashboard</div>
+          <div class="tab-highlight">"$175M locked, 15% volume spike"</div>
+        </div>
+        <a href="tabs/06-minswap.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">7</span>
+        <div class="tab-info">
+          <div class="tab-name">X Post - @CardanoStiftung</div>
+          <div class="tab-highlight">"Ecosystem growth announcement"</div>
+        </div>
+        <a href="tabs/07-x-post.html" target="_blank">Open</a>
+      </li>
+
+      <li class="tab-item">
+        <span class="tab-number">8</span>
+        <div class="tab-info">
+          <div class="tab-name">CTA End Card</div>
+          <div class="tab-highlight">Subscribe + like reminder</div>
+        </div>
+        <a href="tabs/08-cta-card.html" target="_blank">Open</a>
+      </li>
+    </ul>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+      <a href="script.html" target="_blank" style="color: var(--electric-cyan); font-size: 1.1rem;">📜 Open Teleprompter Script</a>
+    </div>
+  </div>
+
+  <script>
+    const tabUrls = [
+      "tabs/01-title-card.html",
+      "tabs/02-coingecko.html",
+      "tabs/03-tradingview.html",
+      "tabs/04-defillama.html",
+      "tabs/05-article.html",
+      "tabs/06-minswap.html",
+      "tabs/07-x-post.html",
+      "tabs/08-cta-card.html"
+    ];
+
+    function openAllTabs() {
+      tabUrls.forEach((url, index) => {
+        setTimeout(() => {
+          window.open(url, '_blank');
+        }, index * 300);
+      });
+    }
+  </script>
+</body>
+</html>
