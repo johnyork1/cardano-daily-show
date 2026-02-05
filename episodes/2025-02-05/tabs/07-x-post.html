@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Post - Cardano Analysis</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #000;
+      color: #e7e9ea;
+      line-height: 1.5;
+    }
+
+    /* X Header */
+    .x-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      padding: 12px 16px;
+      border-bottom: 1px solid #2f3336;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+    }
+
+    .x-logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .search-box {
+      background: #202327;
+      border-radius: 20px;
+      padding: 10px 16px;
+      color: #71767b;
+      font-size: 0.9rem;
+      flex-grow: 1;
+      max-width: 400px;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 60px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 275px;
+      padding: 20px;
+      position: fixed;
+      left: calc(50% - 600px);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      color: #e7e9ea;
+      margin-bottom: 8px;
+    }
+
+    .nav-item:hover {
+      background: #181818;
+    }
+
+    /* Main Content */
+    .main-content {
+      width: 600px;
+      margin-left: 275px;
+      border-left: 1px solid #2f3336;
+      border-right: 1px solid #2f3336;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      padding: 16px;
+      border-bottom: 1px solid #2f3336;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* Tweet */
+    .tweet {
+      padding: 16px;
+      border-bottom: 1px solid #2f3336;
+    }
+
+    .tweet-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .user-info {
+      flex-grow: 1;
+    }
+
+    .display-name {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .verified {
+      color: #1da1f2;
+    }
+
+    .username {
+      color: #71767b;
+    }
+
+    .tweet-text {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .tweet-image {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #16181c;
+    }
+
+    .tweet-image img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Emulated image */
+    .emulated-image {
+      background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 30px;
+    }
+
+    .harold-placeholder {
+      width: 150px;
+      height: 180px;
+      background: #2a3a5a;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.8rem;
+    }
+
+    .cardano-logo {
+      font-size: 4rem;
+      color: #00D4FF;
+    }
+
+    .cardano-text {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 4px;
+    }
+
+    .tweet-stats {
+      display: flex;
+      gap: 24px;
+      color: #71767b;
+      font-size: 0.9rem;
+      padding-top: 12px;
+      border-top: 1px solid #2f3336;
+      margin-top: 12px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* HIGHLIGHT STYLES */
+    .highlight {
+      background: rgba(255, 235, 59, 0.35);
+      border: 2px solid #FFD600;
+      border-radius: 4px;
+      padding: 2px 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(255, 214, 0, 0); }
+    }
+
+    .highlight-box {
+      border: 3px solid #FFD600;
+      background: rgba(255, 235, 59, 0.08);
+      animation: pulse 2s infinite;
+    }
+
+    /* Trending sidebar */
+    .trending-sidebar {
+      width: 350px;
+      padding: 20px;
+      margin-left: 875px;
+      position: fixed;
+    }
+
+    .trending-box {
+      background: #16181c;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .trending-header {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .trending-item {
+      padding: 12px 0;
+      border-bottom: 1px solid #2f3336;
+    }
+
+    .trending-item:last-child {
+      border-bottom: none;
+    }
+
+    .trending-category {
+      font-size: 0.8rem;
+      color: #71767b;
+    }
+
+    .trending-topic {
+      font-weight: bold;
+      margin: 4px 0;
+    }
+
+    .trending-posts {
+      font-size: 0.8rem;
+      color: #71767b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- X Header -->
+  <header class="x-header">
+    <div class="x-logo">𝕏</div>
+    <div class="search-box">🔍 Search</div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="nav-item">🏠 Home</div>
+      <div class="nav-item">🔍 Explore</div>
+      <div class="nav-item">🔔 Notifications</div>
+      <div class="nav-item">✉️ Messages</div>
+      <div class="nav-item">📑 Bookmarks</div>
+      <div class="nav-item">👤 Profile</div>
+    </nav>
+
+    <!-- Main Tweet -->
+    <main class="main-content">
+      <div class="page-header">Post</div>
+
+      <article class="tweet highlight-box">
+        <div class="tweet-header">
+          <div class="avatar">T</div>
+          <div class="user-info">
+            <div class="display-name">
+              Tezzo <span class="verified">✓</span>
+            </div>
+            <div class="username">@Tezzo100x · 19h</div>
+          </div>
+        </div>
+
+        <div class="tweet-text">
+          🚨 BREAKING: Harold just hinted that analysis shows <span class="highlight">Cardano is set to hit $100 before March 1st</span>
+        </div>
+
+        <div class="tweet-image">
+          <div class="emulated-image">
+            <div class="harold-placeholder">[Harold Image]</div>
+            <div>
+              <div class="cardano-logo">◈</div>
+              <div class="cardano-text">CARDANO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tweet-stats">
+          <span class="stat">💬 150</span>
+          <span class="stat">🔁 22</span>
+          <span class="stat">❤️ 216</span>
+          <span class="stat">📊 3.2K</span>
+        </div>
+      </article>
+    </main>
+
+    <!-- Trending Sidebar -->
+    <aside class="trending-sidebar">
+      <div class="trending-box">
+        <div class="trending-header">What's happening</div>
+
+        <div class="trending-item highlight-box" style="border-radius: 8px; padding: 12px; margin: 8px 0;">
+          <div class="trending-category">Business and finance · Trending</div>
+          <div class="trending-topic highlight">Cardano</div>
+          <div class="trending-posts">45.2K posts</div>
+        </div>
+
+        <div class="trending-item">
+          <div class="trending-category">Crypto · Trending</div>
+          <div class="trending-topic">Grayscale</div>
+          <div class="trending-posts">12.8K posts</div>
+        </div>
+
+        <div class="trending-item">
+          <div class="trending-category">Crypto · Trending</div>
+          <div class="trending-topic">#ADA</div>
+          <div class="trending-posts">8.4K posts</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+</body>
+</html>
