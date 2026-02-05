@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tezzo on X - Cardano $100</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #0f1419; }
+
+    .x-layout { display: flex; min-height: 100vh; }
+
+    .x-sidebar { width: 275px; padding: 12px; border-right: 1px solid #eff3f4; }
+    .x-logo { font-size: 2rem; padding: 12px; }
+    .nav-item { display: flex; align-items: center; gap: 20px; padding: 12px; border-radius: 30px; font-size: 1.25rem; margin: 4px 0; cursor: pointer; }
+    .nav-item:hover { background: #eff3f4; }
+    .nav-label { font-weight: 400; }
+    .post-btn { background: #000; color: #fff; border: none; border-radius: 30px; padding: 16px 0; width: 90%; font-size: 1.1rem; font-weight: 700; margin-top: 16px; cursor: pointer; }
+
+    .x-main { flex: 1; max-width: 600px; border-right: 1px solid #eff3f4; }
+    .x-header { padding: 16px; border-bottom: 1px solid #eff3f4; display: flex; align-items: center; gap: 24px; }
+    .back-arrow { font-size: 1.25rem; cursor: pointer; }
+    .search-box { flex: 1; background: #eff3f4; border-radius: 20px; padding: 12px 16px; border: none; font-size: 0.95rem; }
+
+    .x-tabs { display: flex; border-bottom: 1px solid #eff3f4; }
+    .x-tab { flex: 1; text-align: center; padding: 16px; font-weight: 500; color: #536471; cursor: pointer; }
+    .x-tab.active { color: #0f1419; font-weight: 700; border-bottom: 4px solid #000; }
+
+    .tweet { padding: 16px; border-bottom: 1px solid #eff3f4; }
+    .tweet-header { display: flex; gap: 12px; }
+    .avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #1a1a2e 0%, #0d47a1 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.2rem; }
+    .tweet-user { display: flex; align-items: center; gap: 4px; }
+    .display-name { font-weight: 700; }
+    .verified { color: #1d9bf0; }
+    .username { color: #536471; }
+    .tweet-time { color: #536471; }
+
+    .tweet-content { margin-top: 4px; }
+    .tweet-text { font-size: 1.1rem; line-height: 1.4; margin-bottom: 12px; }
+    .breaking { color: #f4212e; font-weight: 700; }
+
+    .tweet-image { border-radius: 16px; overflow: hidden; margin-top: 12px; height: 320px; display: flex; }
+    .harold-side { width: 45%; background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%); position: relative; display: flex; align-items: center; justify-content: center; }
+    .harold-silhouette { width: 120px; height: 150px; background: linear-gradient(180deg, #4a5568 0%, #2d3748 100%); border-radius: 50% 50% 0 0; position: relative; }
+    .harold-silhouette::before { content: ''; position: absolute; width: 80px; height: 80px; background: #5a6578; border-radius: 50%; top: -30px; left: 50%; transform: translateX(-50%); }
+    .cardano-side { width: 55%; background: linear-gradient(135deg, #0033AD 0%, #0052FF 50%, #0033AD 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+    .ada-symbol { font-size: 4rem; }
+    .ada-text { font-size: 1.8rem; font-weight: bold; letter-spacing: 3px; margin-top: 8px; }
+    .price-prediction { margin-top: 16px; font-size: 2.5rem; font-weight: bold; color: #00FF88; text-shadow: 0 2px 10px rgba(0,255,136,0.5); }
+
+    .tweet-actions { display: flex; gap: 48px; margin-top: 16px; color: #536471; }
+    .action { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .action:hover { color: #1d9bf0; }
+
+    .x-trending { width: 350px; padding: 16px; }
+    .trending-box { background: #f7f9f9; border-radius: 16px; padding: 16px; margin-bottom: 16px; }
+    .trending-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 16px; }
+    .trend-item { padding: 12px 0; border-bottom: 1px solid #eff3f4; }
+    .trend-item:last-child { border-bottom: none; }
+    .trend-category { font-size: 0.8rem; color: #536471; }
+    .trend-name { font-weight: 700; margin: 4px 0; }
+    .trend-posts { font-size: 0.8rem; color: #536471; }
+
+    .highlight { background: linear-gradient(to bottom, rgba(255, 230, 0, 0.35) 0%, rgba(255, 210, 0, 0.55) 50%, rgba(255, 230, 0, 0.35) 100%); padding: 3px 6px; border-radius: 3px; box-shadow: 0 0 8px rgba(255, 200, 0, 0.3); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 8px rgba(255, 200, 0, 0.3); } 50% { box-shadow: 0 0 15px rgba(255, 200, 0, 0.5); } }
+
+    .emulated-badge { position: fixed; top: 20px; right: 20px; background: rgba(255, 152, 0, 0.95); color: white; padding: 8px 16px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; z-index: 9999; }
+  </style>
+</head>
+<body>
+  <div class="emulated-badge">EMULATED PAGE</div>
+
+  <div class="x-layout">
+    <aside class="x-sidebar">
+      <div class="x-logo">𝕏</div>
+      <nav>
+        <div class="nav-item"><span>🏠</span><span class="nav-label">Home</span></div>
+        <div class="nav-item"><span>🔍</span><span class="nav-label">Explore</span></div>
+        <div class="nav-item"><span>🔔</span><span class="nav-label">Notifications</span></div>
+        <div class="nav-item"><span>✉️</span><span class="nav-label">Messages</span></div>
+        <div class="nav-item"><span>🔖</span><span class="nav-label">Bookmarks</span></div>
+      </nav>
+      <button class="post-btn">Post</button>
+    </aside>
+
+    <main class="x-main">
+      <div class="x-header">
+        <span class="back-arrow">←</span>
+        <input type="text" class="search-box" value="cardano" readonly>
+      </div>
+
+      <div class="x-tabs">
+        <div class="x-tab active">Top</div>
+        <div class="x-tab">Latest</div>
+        <div class="x-tab">People</div>
+        <div class="x-tab">Media</div>
+      </div>
+
+      <article class="tweet">
+        <div class="tweet-header">
+          <div class="avatar">T</div>
+          <div class="tweet-content">
+            <div class="tweet-user">
+              <span class="display-name">Tezzo</span>
+              <span class="verified">✓</span>
+              <span class="username">@Tezzo100x</span>
+              <span class="tweet-time">· 19h</span>
+            </div>
+            <p class="tweet-text">
+              <span class="breaking">BREAKING 🚨</span>: <span class="highlight">Harold just hinted that analysis shows Cardano is set to hit $100 before March 1st</span>
+            </p>
+
+            <div class="tweet-image">
+              <div class="harold-side">
+                <div class="harold-silhouette"></div>
+              </div>
+              <div class="cardano-side">
+                <div class="ada-symbol">₳</div>
+                <div class="ada-text">CARDANO</div>
+                <div class="price-prediction">$100</div>
+              </div>
+            </div>
+
+            <div class="tweet-actions">
+              <div class="action">💬 151</div>
+              <div class="action">🔁 23</div>
+              <div class="action">❤️ 222</div>
+              <div class="action">📊 3.4K</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <aside class="x-trending">
+      <div class="trending-box">
+        <div class="trending-title">What's happening</div>
+        <div class="trend-item">
+          <div class="trend-category">Crypto · Trending</div>
+          <div class="trend-name highlight">Cardano</div>
+          <div class="trend-posts">45.2K posts</div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-category">Crypto · Trending</div>
+          <div class="trend-name">Bitcoin</div>
+          <div class="trend-posts">128K posts</div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-category">Finance · Trending</div>
+          <div class="trend-name">CME Futures</div>
+          <div class="trend-posts">12.8K posts</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

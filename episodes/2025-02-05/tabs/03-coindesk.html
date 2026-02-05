@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CME Group to offer cardano, chainlink, stellar futures - CoinDesk</title>
+  <link rel="icon" href="https://www.coindesk.com/favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .cd-header {
+      background: #fff;
+      padding: 12px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .menu-icon {
+      font-size: 1.5rem;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .search-icon {
+      font-size: 1.2rem;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .cd-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .cd-logo-icon {
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+
+    .cd-logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px dotted #FFCC00;
+      border-radius: 50%;
+    }
+
+    .cd-logo-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      background: #FFCC00;
+      border-radius: 50%;
+    }
+
+    .cd-logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1a1a1a;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-icon {
+      width: 32px;
+      height: 32px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Price Ticker */
+    .price-ticker {
+      background: #fff;
+      padding: 8px 20px;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: flex;
+      gap: 24px;
+      font-size: 0.85rem;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ticker-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: bold;
+    }
+
+    .ticker-icon.btc { background: #F7931A; color: white; }
+    .ticker-icon.eth { background: #627EEA; color: white; }
+    .ticker-icon.bnb { background: #F3BA2F; color: #1a1a1a; }
+    .ticker-icon.xrp { background: #23292F; color: white; }
+    .ticker-icon.sol { background: #14F195; color: #1a1a1a; }
+
+    .ticker-symbol {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .ticker-price {
+      color: #333;
+    }
+
+    .ticker-change {
+      font-weight: 500;
+    }
+
+    .ticker-change.down { color: #E53935; }
+    .ticker-change.up { color: #00C853; }
+
+    /* Main Content */
+    .main-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .article-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .article-category {
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #666;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .article-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #1a1a1a;
+    }
+
+    .article-subtitle {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .article-byline {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .article-byline a {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
+
+    .article-date {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    /* Featured Image */
+    .featured-image {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 8px;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chart-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(90deg, rgba(255,204,0,0.1) 1px, transparent 1px),
+        linear-gradient(rgba(255,204,0,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 200px;
+      z-index: 1;
+    }
+
+    .bar {
+      width: 20px;
+      border-radius: 2px;
+    }
+
+    .bar.green { background: #00C853; }
+    .bar.red { background: #E53935; }
+    .bar.yellow { background: #FFCC00; }
+
+    /* Article Body */
+    .article-body {
+      font-size: 1.1rem;
+    }
+
+    .article-body p {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* Highlight Styles */
+    .highlight {
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 230, 0, 0.35) 0%,
+        rgba(255, 210, 0, 0.55) 50%,
+        rgba(255, 230, 0, 0.35) 100%
+      );
+      padding: 3px 6px;
+      border-radius: 3px;
+      box-shadow: 0 0 8px rgba(255, 200, 0, 0.3);
+      animation: pulse-highlight 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-highlight {
+      0%, 100% {
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 230, 0, 0.35) 0%,
+          rgba(255, 210, 0, 0.55) 50%,
+          rgba(255, 230, 0, 0.35) 100%
+        );
+        box-shadow: 0 0 8px rgba(255, 200, 0, 0.3);
+      }
+      50% {
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 230, 0, 0.5) 0%,
+          rgba(255, 200, 0, 0.75) 50%,
+          rgba(255, 230, 0, 0.5) 100%
+        );
+        box-shadow: 0 0 15px rgba(255, 200, 0, 0.5);
+      }
+    }
+
+    .highlight-box {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 230, 0, 0.25) 0%,
+        rgba(255, 230, 0, 0.1) 100%
+      );
+      border-left: 5px solid #FFD700;
+      padding: 20px 24px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 12px rgba(255, 200, 0, 0.15);
+      animation: pulse-box 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-box {
+      0%, 100% {
+        border-left-color: #FFD700;
+        background: linear-gradient(90deg, rgba(255, 230, 0, 0.25) 0%, rgba(255, 230, 0, 0.1) 100%);
+        box-shadow: 0 2px 12px rgba(255, 200, 0, 0.15);
+      }
+      50% {
+        border-left-color: #FFC000;
+        background: linear-gradient(90deg, rgba(255, 220, 0, 0.4) 0%, rgba(255, 230, 0, 0.2) 100%);
+        box-shadow: 0 2px 20px rgba(255, 200, 0, 0.3);
+      }
+    }
+
+    .highlight-box p {
+      margin-bottom: 0;
+    }
+
+    blockquote {
+      border-left: 4px solid #FFCC00;
+      padding-left: 20px;
+      margin: 25px 0;
+      font-style: italic;
+      color: #555;
+    }
+
+    /* Emulated Badge */
+    .emulated-badge {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: rgba(255, 152, 0, 0.95);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      z-index: 9999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="emulated-badge">EMULATED PAGE</div>
+
+  <!-- Header -->
+  <header class="cd-header">
+    <div class="header-left">
+      <span class="menu-icon">☰</span>
+      <span class="search-icon">🔍</span>
+      <a href="#" class="cd-logo">
+        <div class="cd-logo-icon"></div>
+        <span class="cd-logo-text">CoinDesk</span>
+      </a>
+    </div>
+    <div class="header-right">
+      <div class="user-icon">👤</div>
+    </div>
+  </header>
+
+  <!-- Price Ticker -->
+  <div class="price-ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item">
+        <div class="ticker-icon btc">₿</div>
+        <span class="ticker-symbol">BTC</span>
+        <span class="ticker-price">$70,402.63</span>
+        <span class="ticker-change down">▼ 7.65%</span>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-icon eth">Ξ</div>
+        <span class="ticker-symbol">ETH</span>
+        <span class="ticker-price">$2,094.51</span>
+        <span class="ticker-change down">▼ 7.48%</span>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-icon bnb">B</div>
+        <span class="ticker-symbol">BNB</span>
+        <span class="ticker-price">$689.19</span>
+        <span class="ticker-change down">▼ 8.77%</span>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-icon xrp">X</div>
+        <span class="ticker-symbol">XRP</span>
+        <span class="ticker-price">$1.4355</span>
+        <span class="ticker-change down">▼ 9.61%</span>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-icon sol">◎</div>
+        <span class="ticker-symbol">SOL</span>
+        <span class="ticker-price">$90.01</span>
+        <span class="ticker-change down">▼ 7.19%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <div class="article-meta-top">
+      <span class="article-category">Markets</span>
+      <span class="share-btn">↗ Share</span>
+    </div>
+
+    <h1 class="article-title">CME Group to offer cardano, chainlink, stellar futures as institutions seek regulated risk-management tools</h1>
+
+    <p class="article-subtitle">The new futures contracts, available in micro and standard sizes, are set to launch on Feb. 9, pending regulatory approval.</p>
+
+    <p class="article-byline">By <a href="#">Omkar Godbole</a> | Edited by <a href="#">Sam Reynolds</a></p>
+    <p class="article-date">Updated Jan 16, 2026, 12:01 a.m. · Published Jan 15, 2026, 11:47 p.m.</p>
+
+    <div class="featured-image">
+      <div class="chart-overlay"></div>
+      <div class="chart-bars">
+        <div class="bar green" style="height: 80px;"></div>
+        <div class="bar red" style="height: 120px;"></div>
+        <div class="bar yellow" style="height: 60px;"></div>
+        <div class="bar green" style="height: 140px;"></div>
+        <div class="bar red" style="height: 90px;"></div>
+        <div class="bar yellow" style="height: 110px;"></div>
+        <div class="bar green" style="height: 70px;"></div>
+        <div class="bar red" style="height: 100px;"></div>
+        <div class="bar yellow" style="height: 130px;"></div>
+        <div class="bar green" style="height: 85px;"></div>
+      </div>
+    </div>
+
+    <div class="article-body">
+      <p><span class="highlight">CME Group, the world's leading derivatives marketplace, announced plans to launch futures contracts for Cardano (ADA), Chainlink (LINK), and Stellar (XLM)</span> as institutional demand for regulated cryptocurrency exposure continues to grow.</p>
+
+      <div class="highlight-box">
+        <p><strong>Key Highlight:</strong> <span class="highlight">The new contracts will be available in both micro and standard sizes, launching February 9, 2026, pending regulatory approval from the CFTC.</span></p>
+      </div>
+
+      <p>The move represents a significant expansion of CME's cryptocurrency derivatives offerings, which currently include Bitcoin and Ethereum futures. According to the exchange, the addition reflects <span class="highlight">growing institutional appetite for regulated exposure to a broader range of digital assets</span>.</p>
+
+      <blockquote>"As institutional interest in digital assets continues to evolve, we're committed to providing the risk-management tools our clients need," said Giovanni Vicioso, CME Group's Global Head of Cryptocurrency Products.</blockquote>
+
+      <p>Cardano, in particular, has seen increased institutional interest following the launch of several spot ETF applications. <span class="highlight">The ADA futures contracts will allow institutions to hedge positions or gain exposure without holding the underlying asset directly.</span></p>
+
+      <p>The micro contracts will be sized at 1,000 ADA, 50 LINK, and 10,000 XLM respectively, while standard contracts will be 10x larger, catering to different trading strategies and risk appetites.</p>
+    </div>
+  </main>
+</body>
+</html>

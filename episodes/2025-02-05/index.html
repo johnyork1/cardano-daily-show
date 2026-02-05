@@ -3,125 +3,298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Episode 2025-02-05 | Blockchain Basics</title>
+  <title>Episode: Feb 5, 2025 | Blockchain Basics</title>
   <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
-  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a14; color: #e0e0e0; line-height: 1.6; }
+
+    .nav-tabs {
+      position: sticky;
+      top: 0;
+      background: #0a0a14;
+      border-bottom: 1px solid #222;
+      padding: 0 20px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .nav-tab {
+      padding: 16px 24px;
+      cursor: pointer;
+      color: #666;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-tab:hover { color: #aaa; }
+    .nav-tab.active { color: #00d4ff; border-bottom-color: #00d4ff; }
+
+    .section { display: none; padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+    .section.active { display: block; }
+
+    /* HEADER */
+    .header { text-align: center; padding: 30px 0 40px; border-bottom: 1px solid #222; margin-bottom: 40px; }
+    .logo { font-size: 2.5rem; color: #00d4ff; }
+    .brand { font-size: 1rem; color: #666; letter-spacing: 4px; margin: 8px 0; }
+    .date { font-size: 1.4rem; font-weight: 600; }
+    .topic { color: #888; margin-top: 8px; }
+
+    /* TABS SECTION */
+    .tabs-grid { display: grid; gap: 12px; margin-bottom: 40px; }
+    .tab-card {
+      background: #12121c;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+    .tab-card:hover { border-color: #00d4ff44; background: #16162a; }
+    .tab-num { width: 50px; height: 50px; background: #00d4ff22; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.3rem; color: #00d4ff; }
+    .tab-info {}
+    .tab-source { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+    .tab-title { font-weight: 600; margin-top: 4px; }
+    .tab-link { background: #00d4ff; color: #000; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    .tab-link:hover { background: #00b8e6; }
+
+    /* SUMMARY SECTION */
+    .summary-block { background: #12121c; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #222; }
+    .summary-title { font-size: 1.1rem; font-weight: 700; color: #00d4ff; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .key-points { list-style: none; }
+    .key-points li { padding: 10px 0; padding-left: 20px; position: relative; border-bottom: 1px solid #1a1a2a; }
+    .key-points li:last-child { border-bottom: none; }
+    .key-points li::before { content: '▸'; position: absolute; left: 0; color: #00d4ff; }
+
+    .talking-point { background: #0a1a2a; border-left: 4px solid #00d4ff; padding: 16px 20px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+    .talking-point strong { color: #00d4ff; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+    .vocab-card { background: #0a0a14; border: 1px solid #222; border-radius: 8px; padding: 14px; }
+    .vocab-term { font-weight: 700; color: #FFD700; margin-bottom: 4px; }
+    .vocab-def { font-size: 0.9rem; color: #888; }
+
+    /* SCRIPT SECTION */
+    .script-controls { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222; }
+    .script-controls button { background: #222; color: #fff; border: 1px solid #333; padding: 8px 20px; border-radius: 6px; cursor: pointer; }
+    .script-controls button:hover { background: #333; }
+
+    .script-block { margin-bottom: 50px; }
+    .screen-cue { background: #00d4ff11; border-left: 4px solid #00d4ff; padding: 10px 16px; margin: 20px 0; font-size: 0.85rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px; font-family: monospace; }
+    .script-text { font-family: Georgia, serif; font-size: 1.4rem; line-height: 2; margin: 16px 0; }
+    .emphasis { color: #FFD700; font-weight: 600; }
+    .pause { color: #666; font-style: italic; font-size: 0.85em; }
+    .stat { color: #00FF88; font-weight: 600; }
+
+    /* FOOTER */
+    .back-link { display: block; text-align: center; padding: 30px; color: #666; text-decoration: none; border-top: 1px solid #222; margin-top: 40px; }
+    .back-link:hover { color: #00d4ff; }
+  </style>
 </head>
 <body>
-  <a href="../../index.html" class="back-link">← All Episodes</a>
 
-  <div class="episode-container">
-    <header class="episode-header">
-      <h1>February 5, 2025</h1>
-      <p class="topic">Cardano TVL Hits $500M — What's Driving the Surge?</p>
+  <nav class="nav-tabs">
+    <div class="nav-tab active" data-section="tabs" onclick="showSection('tabs')">📂 Tabs</div>
+    <div class="nav-tab" data-section="summary" onclick="showSection('summary')">📚 Summary</div>
+    <div class="nav-tab" data-section="script" onclick="showSection('script')">🎬 Script</div>
+  </nav>
+
+  <!-- TABS SECTION -->
+  <div id="tabs" class="section active">
+    <header class="header">
+      <div class="logo">B·B</div>
+      <div class="brand">BLOCKCHAIN BASICS</div>
+      <div class="date">February 5, 2025</div>
+      <div class="topic">Hoskinson on Policy, Novogratz's Challenge, and $100 Predictions</div>
     </header>
 
-    <button class="open-all-btn" onclick="openAllTabs()">
-      ▶ Open All Tabs for Recording
-    </button>
-
-    <p style="text-align: center; color: #888; margin-bottom: 30px; font-size: 0.9rem;">
-      Or right-click each link → "Open in New Tab"
-    </p>
-
-    <ul class="tab-list">
-      <li class="tab-item">
-        <span class="tab-number">1</span>
+    <div class="tabs-grid">
+      <div class="tab-card">
+        <div class="tab-num">1</div>
         <div class="tab-info">
-          <div class="tab-name">Title Card</div>
-          <div class="tab-highlight">3-second intro</div>
+          <div class="tab-source">CoinDesk · Policy</div>
+          <div class="tab-title">Charles Hoskinson slams Trump's crypto policy as 'extractive'</div>
         </div>
-        <a href="tabs/01-title-card.html" target="_blank">Open</a>
-      </li>
+        <a href="tabs/01-hoskinson-policy.html" target="_blank" class="tab-link">Open</a>
+      </div>
 
-      <li class="tab-item">
-        <span class="tab-number">2</span>
+      <div class="tab-card">
+        <div class="tab-num">2</div>
         <div class="tab-info">
-          <div class="tab-name">CoinGecko ADA</div>
-          <div class="tab-highlight">"ADA $0.72, up 4.3% in 24 hours"</div>
+          <div class="tab-source">CoinDesk · Markets</div>
+          <div class="tab-title">XRP and Cardano need to prove they're useful, Novogratz says</div>
         </div>
-        <a href="tabs/02-coingecko.html" target="_blank">Open</a>
-      </li>
+        <a href="tabs/02-novogratz-markets.html" target="_blank" class="tab-link">Open</a>
+      </div>
 
-      <li class="tab-item">
-        <span class="tab-number">3</span>
+      <div class="tab-card">
+        <div class="tab-num">3</div>
         <div class="tab-info">
-          <div class="tab-name">TradingView ADA/USDT</div>
-          <div class="tab-highlight">"ascending channel since Tuesday"</div>
+          <div class="tab-source">CoinDesk · Markets</div>
+          <div class="tab-title">CME Group to offer Cardano futures</div>
         </div>
-        <a href="tabs/03-tradingview.html" target="_blank">Open</a>
-      </li>
+        <a href="tabs/03-coindesk.html" target="_blank" class="tab-link">Open</a>
+      </div>
 
-      <li class="tab-item">
-        <span class="tab-number">4</span>
+      <div class="tab-card">
+        <div class="tab-num">4</div>
         <div class="tab-info">
-          <div class="tab-name">DeFiLlama Cardano TVL</div>
-          <div class="tab-highlight">"TVL crossed $500M this week"</div>
+          <div class="tab-source">X · @Tezzo100x</div>
+          <div class="tab-title">BREAKING: Harold hints Cardano to hit $100</div>
         </div>
-        <a href="tabs/04-defillama.html" target="_blank">Open</a>
-      </li>
-
-      <li class="tab-item">
-        <span class="tab-number">5</span>
-        <div class="tab-info">
-          <div class="tab-name">CoinDesk Article</div>
-          <div class="tab-highlight">"Minswap leads with 35% of total TVL"</div>
-        </div>
-        <a href="tabs/05-article.html" target="_blank">Open</a>
-      </li>
-
-      <li class="tab-item">
-        <span class="tab-number">6</span>
-        <div class="tab-info">
-          <div class="tab-name">Minswap Dashboard</div>
-          <div class="tab-highlight">"$175M locked, 15% volume spike"</div>
-        </div>
-        <a href="tabs/06-minswap.html" target="_blank">Open</a>
-      </li>
-
-      <li class="tab-item">
-        <span class="tab-number">7</span>
-        <div class="tab-info">
-          <div class="tab-name">X Post - @CardanoStiftung</div>
-          <div class="tab-highlight">"Ecosystem growth announcement"</div>
-        </div>
-        <a href="tabs/07-x-post.html" target="_blank">Open</a>
-      </li>
-
-      <li class="tab-item">
-        <span class="tab-number">8</span>
-        <div class="tab-info">
-          <div class="tab-name">CTA End Card</div>
-          <div class="tab-highlight">Subscribe + like reminder</div>
-        </div>
-        <a href="tabs/08-cta-card.html" target="_blank">Open</a>
-      </li>
-    </ul>
-
-    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
-      <a href="script.html" target="_blank" style="color: var(--electric-cyan); font-size: 1.1rem;">📜 Open Teleprompter Script</a>
+        <a href="tabs/04-x-tezzo.html" target="_blank" class="tab-link">Open</a>
+      </div>
     </div>
   </div>
 
-  <script>
-    const tabUrls = [
-      "tabs/01-title-card.html",
-      "tabs/02-coingecko.html",
-      "tabs/03-tradingview.html",
-      "tabs/04-defillama.html",
-      "tabs/05-article.html",
-      "tabs/06-minswap.html",
-      "tabs/07-x-post.html",
-      "tabs/08-cta-card.html"
-    ];
+  <!-- SUMMARY SECTION -->
+  <div id="summary" class="section">
+    <div class="summary-block">
+      <div class="summary-title">📰 Today's Headlines</div>
+      <ul class="key-points">
+        <li><strong>Hoskinson vs. Trump Policy:</strong> Cardano founder criticizes current crypto regulations as "extractive" — warns it's turning crypto into a partisan issue</li>
+        <li><strong>Novogratz's Challenge:</strong> Galaxy Digital CEO says XRP and Cardano need to prove utility beyond passionate communities</li>
+        <li><strong>CME Futures:</strong> Institutional-grade Cardano futures launching Feb 9th</li>
+        <li><strong>Price Speculation:</strong> Social media buzz around $100 targets (take with massive skepticism)</li>
+      </ul>
+    </div>
 
-    function openAllTabs() {
-      tabUrls.forEach((url, index) => {
-        setTimeout(() => {
-          window.open(url, '_blank');
-        }, index * 300);
+    <div class="summary-block">
+      <div class="summary-title">💡 Key Talking Points</div>
+      <div class="talking-point">
+        <strong>On Hoskinson's Criticism:</strong> "Charles Hoskinson is warning that making crypto a political football could alienate half of potential adopters. His concern? When regulations favor one party's interests, the industry loses its appeal as neutral financial infrastructure."
+      </div>
+      <div class="talking-point">
+        <strong>On the Utility Question:</strong> "Mike Novogratz raises a fair point—community enthusiasm is great for bull markets, but sustainable value comes from actual usage. The good news? Cardano's TVL is growing, developer activity is up, and projects like Midnight and Hydra show real progress."
+      </div>
+      <div class="talking-point">
+        <strong>On Price Predictions:</strong> "You'll see wild price predictions on social media—$100 Cardano by March? ADA is at 28 cents. That's a 350x in one month. Focus on fundamentals, not hype."
+      </div>
+    </div>
+
+    <div class="summary-block">
+      <div class="summary-title">📚 Vocabulary</div>
+      <div class="vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-term">Extractive Policy</div>
+          <div class="vocab-def">Regulations designed to benefit specific groups at the expense of broader industry health</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-term">TVL (Total Value Locked)</div>
+          <div class="vocab-def">Total crypto assets deposited in a blockchain's DeFi protocols—key ecosystem health metric</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-term">Hydra</div>
+          <div class="vocab-def">Cardano's Layer 2 scaling solution for fast, low-cost off-chain transactions</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-term">Midnight</div>
+          <div class="vocab-def">Cardano's privacy sidechain using zero-knowledge proofs for confidential smart contracts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT SECTION -->
+  <div id="script" class="section">
+    <div class="script-controls">
+      <button onclick="changeFontSize(-0.15)">A−</button>
+      <span style="color:#666; padding: 8px;">Font Size</span>
+      <button onclick="changeFontSize(0.15)">A+</button>
+    </div>
+
+    <div class="script-block">
+      <div class="screen-cue">[SCREEN: Tab 1 - Hoskinson Article]</div>
+      <p class="script-text">Hey everyone, welcome back to <span class="emphasis">Blockchain Basics</span>.</p>
+      <p class="script-text">Today we've got some important news from Cardano founder <span class="emphasis">Charles Hoskinson</span>, plus a challenge from Galaxy Digital's Mike Novogratz that every Cardano holder should hear.</p>
+      <p class="script-text"><span class="pause">[beat]</span></p>
+      <p class="script-text">Let's start with Hoskinson's comments on crypto policy.</p>
+    </div>
+
+    <div class="script-block">
+      <div class="screen-cue">[SCREEN: Scroll to highlighted quote]</div>
+      <p class="script-text">In a recent interview, Hoskinson called the current administration's approach to crypto <span class="emphasis">"extractive"</span> — meaning it's designed to benefit specific groups rather than the broader industry.</p>
+      <p class="script-text">His biggest concern? <span class="pause">[beat]</span></p>
+      <p class="script-text">When you make crypto a <span class="emphasis">partisan issue</span>, you've already lost half the country.</p>
+      <p class="script-text">Blockchain technology is supposed to be <span class="emphasis">neutral infrastructure</span> — available to everyone regardless of their politics.</p>
+    </div>
+
+    <div class="script-block">
+      <div class="screen-cue">[SCREEN: Tab 2 - Novogratz Article]</div>
+      <p class="script-text">Now, speaking of challenges for Cardano...</p>
+      <p class="script-text"><span class="emphasis">Mike Novogratz</span> — CEO of Galaxy Digital — had some pointed words for both XRP and Cardano communities.</p>
+      <p class="script-text">He basically said: <span class="emphasis">"Prove you're useful."</span></p>
+      <p class="script-text"><span class="pause">[beat]</span></p>
+      <p class="script-text">Now, before you get defensive — he's making a fair point.</p>
+      <p class="script-text">Bitcoin has a clear value proposition: <span class="emphasis">store of value</span>. Ethereum has one too: <span class="emphasis">smart contract platform</span>.</p>
+      <p class="script-text">But what's Cardano's killer app?</p>
+      <p class="script-text">The good news is — Cardano IS building real utility. TVL is growing. Developer activity is up. Projects like <span class="emphasis">Midnight</span> and <span class="emphasis">Hydra</span> show genuine progress.</p>
+    </div>
+
+    <div class="script-block">
+      <div class="screen-cue">[SCREEN: Tab 3 - CME Futures Article]</div>
+      <p class="script-text">Here's some concrete progress on the institutional front.</p>
+      <p class="script-text"><span class="emphasis">CME Group</span> — the world's leading derivatives marketplace — is launching Cardano futures on <span class="stat">February 9th</span>.</p>
+      <p class="script-text">This gives institutional investors a <span class="emphasis">regulated way</span> to get exposure to ADA without holding the token.</p>
+      <p class="script-text">This is exactly the kind of utility proof that Novogratz is talking about.</p>
+    </div>
+
+    <div class="script-block">
+      <div class="screen-cue">[SCREEN: Tab 4 - X Post]</div>
+      <p class="script-text">Now... I have to address the elephant in the room.</p>
+      <p class="script-text">You've probably seen posts like this claiming Cardano will hit <span class="stat">$100</span> by March.</p>
+      <p class="script-text"><span class="pause">[beat]</span></p>
+      <p class="script-text">Look — I love the enthusiasm. But let's be real.</p>
+      <p class="script-text">ADA is currently at <span class="stat">28 cents</span>. Getting to $100 would require a <span class="emphasis">350x</span> increase in less than a month.</p>
+      <p class="script-text">That's... not how markets work.</p>
+      <p class="script-text"><span class="emphasis">Focus on fundamentals</span> — adoption metrics, development progress, real-world use cases. Not price predictions from random accounts.</p>
+    </div>
+
+    <div class="script-block" style="text-align: center; background: #12121c; padding: 30px; border-radius: 12px;">
+      <div class="screen-cue" style="background: none; border: none; margin-bottom: 20px;">[OUTRO]</div>
+      <p class="script-text">That's it for today's Blockchain Basics.</p>
+      <p class="script-text">If you found this helpful, smash that <span class="emphasis">like button</span> and <span class="emphasis">subscribe</span> for daily Cardano updates.</p>
+      <p class="script-text">Drop a comment below — what do you think about Novogratz's utility challenge?</p>
+      <p class="script-text">See you tomorrow.</p>
+    </div>
+  </div>
+
+  <a href="../../index.html" class="back-link">← Back to All Episodes</a>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelector(`[data-section="${id}"]`).classList.add('active');
+      window.location.hash = id;
+    }
+
+    let scriptFontSize = 1.4;
+    function changeFontSize(delta) {
+      scriptFontSize = Math.max(1, Math.min(2.5, scriptFontSize + delta));
+      document.querySelectorAll('.script-text').forEach(el => {
+        el.style.fontSize = scriptFontSize + 'rem';
       });
     }
+
+    // Handle direct links to sections (e.g., index.html#script)
+    function loadFromHash() {
+      const hash = window.location.hash.slice(1);
+      if (['tabs', 'summary', 'script'].includes(hash)) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(hash).classList.add('active');
+        document.querySelector(`[data-section="${hash}"]`).classList.add('active');
+      }
+    }
+
+    window.addEventListener('hashchange', loadFromHash);
+    window.addEventListener('DOMContentLoaded', loadFromHash);
   </script>
 </body>
 </html>
