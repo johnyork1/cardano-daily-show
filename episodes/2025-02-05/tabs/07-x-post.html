@@ -3,351 +3,425 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X Post - Cardano Analysis</title>
+  <title>cardano - Search / X</title>
+  <link rel="icon" href="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #000;
-      color: #e7e9ea;
-      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #fff;
+      color: #0f1419;
+      line-height: 1.4;
     }
 
-    /* X Header */
-    .x-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(12px);
-      padding: 12px 16px;
-      border-bottom: 1px solid #2f3336;
+    .layout {
       display: flex;
-      align-items: center;
-      gap: 20px;
-      z-index: 100;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* Left Sidebar */
+    .sidebar-left {
+      width: 275px;
+      padding: 0 12px;
+      position: fixed;
+      height: 100vh;
     }
 
     .x-logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
-
-    .search-box {
-      background: #202327;
-      border-radius: 20px;
-      padding: 10px 16px;
-      color: #71767b;
-      font-size: 0.9rem;
-      flex-grow: 1;
-      max-width: 400px;
-    }
-
-    /* Layout */
-    .container {
-      display: flex;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 60px;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 275px;
-      padding: 20px;
-      position: fixed;
-      left: calc(50% - 600px);
+      padding: 12px;
+      font-size: 2rem;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 12px 16px;
+      gap: 20px;
+      padding: 12px;
       border-radius: 30px;
-      font-size: 1.2rem;
-      color: #e7e9ea;
-      margin-bottom: 8px;
+      font-size: 1.25rem;
+      cursor: pointer;
+      margin: 4px 0;
     }
 
     .nav-item:hover {
-      background: #181818;
+      background: #e7e7e8;
+    }
+
+    .nav-item svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .post-btn {
+      background: #1d9bf0;
+      color: white;
+      border: none;
+      padding: 16px 0;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      width: 90%;
+      margin-top: 16px;
+      cursor: pointer;
     }
 
     /* Main Content */
-    .main-content {
+    .main {
       width: 600px;
       margin-left: 275px;
-      border-left: 1px solid #2f3336;
-      border-right: 1px solid #2f3336;
+      border-left: 1px solid #eff3f4;
+      border-right: 1px solid #eff3f4;
       min-height: 100vh;
     }
 
-    .page-header {
-      padding: 16px;
-      border-bottom: 1px solid #2f3336;
+    .search-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eff3f4;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+
+    .back-arrow {
       font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .search-box {
+      flex-grow: 1;
+      background: #eff3f4;
+      border-radius: 20px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      border: none;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #eff3f4;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 16px;
+      font-weight: 500;
+      color: #536471;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      color: #0f1419;
+      font-weight: 700;
+      border-bottom: 4px solid #1d9bf0;
+    }
+
+    /* News section */
+    .news-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eff3f4;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .news-text {
+      flex: 1;
+    }
+
+    .news-title {
       font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .news-meta {
+      font-size: 0.85rem;
+      color: #536471;
+    }
+
+    .news-logo {
+      width: 70px;
+      height: 70px;
+      background: #f7f9f9;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #536471;
     }
 
     /* Tweet */
     .tweet {
-      padding: 16px;
-      border-bottom: 1px solid #2f3336;
+      padding: 12px 16px;
+      border-bottom: 1px solid #eff3f4;
     }
 
     .tweet-header {
       display: flex;
-      align-items: flex-start;
       gap: 12px;
-      margin-bottom: 12px;
     }
 
     .avatar {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, #1da1f2, #0d8bd9);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 1.2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .user-info {
-      flex-grow: 1;
+    .tweet-content {
+      flex: 1;
     }
 
-    .display-name {
-      font-weight: bold;
+    .user-row {
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .verified {
-      color: #1da1f2;
+    .display-name {
+      font-weight: bold;
     }
 
-    .username {
-      color: #71767b;
+    .verified {
+      color: #1d9bf0;
+      font-size: 1.1rem;
+    }
+
+    .username, .time {
+      color: #536471;
     }
 
     .tweet-text {
-      font-size: 1.1rem;
-      margin-bottom: 16px;
-      line-height: 1.6;
+      margin: 4px 0 12px;
+      font-size: 0.95rem;
+      line-height: 1.4;
     }
 
     .tweet-image {
       border-radius: 16px;
       overflow: hidden;
-      margin-bottom: 16px;
-      background: #16181c;
+      margin-bottom: 12px;
+      border: 1px solid #eff3f4;
     }
 
-    .tweet-image img {
-      width: 100%;
-      display: block;
-    }
-
-    /* Emulated image */
-    .emulated-image {
-      background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
-      height: 300px;
+    .tweet-image-inner {
       display: flex;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0d47a1 100%);
+      height: 280px;
+    }
+
+    .harold-img {
+      width: 45%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><rect fill="%231a2a3a" width="100%" height="100%"/><text x="50%" y="50%" fill="%23666" text-anchor="middle" font-size="14">[Harold Photo]</text></svg>');
+      background-size: cover;
+    }
+
+    .cardano-side {
+      width: 55%;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 40px;
-      padding: 30px;
+      background: #0033AD;
+      color: white;
     }
 
-    .harold-placeholder {
-      width: 150px;
-      height: 180px;
-      background: #2a3a5a;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 0.8rem;
+    .ada-dots {
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
 
-    .cardano-logo {
-      font-size: 4rem;
-      color: #00D4FF;
-    }
-
-    .cardano-text {
-      font-size: 2.5rem;
+    .ada-text {
+      font-size: 2rem;
       font-weight: bold;
-      color: #fff;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
     }
 
-    .tweet-stats {
+    .tweet-actions {
       display: flex;
-      gap: 24px;
-      color: #71767b;
+      justify-content: space-between;
+      max-width: 400px;
+      color: #536471;
       font-size: 0.9rem;
-      padding-top: 12px;
-      border-top: 1px solid #2f3336;
-      margin-top: 12px;
     }
 
-    .stat {
+    .action {
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
+    /* Right Sidebar */
+    .sidebar-right {
+      width: 350px;
+      margin-left: 875px;
+      padding: 12px 24px;
+      position: fixed;
+    }
+
+    .trending-box {
+      background: #f7f9f9;
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .trending-header {
+      padding: 12px 16px;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .trending-item {
+      padding: 12px 16px;
+      cursor: pointer;
+    }
+
+    .trending-item:hover {
+      background: #eff3f4;
+    }
+
+    .trending-category {
+      font-size: 0.8rem;
+      color: #536471;
+    }
+
+    .trending-topic {
+      font-weight: 700;
+      margin: 2px 0;
+    }
+
+    .trending-posts {
+      font-size: 0.8rem;
+      color: #536471;
+    }
+
     /* HIGHLIGHT STYLES */
     .highlight {
-      background: rgba(255, 235, 59, 0.35);
+      background: rgba(255, 235, 59, 0.5);
       border: 2px solid #FFD600;
       border-radius: 4px;
-      padding: 2px 6px;
+      padding: 1px 4px;
+      animation: pulse 2s infinite;
+    }
+
+    .highlight-box {
+      outline: 3px solid #FFD600;
+      outline-offset: 4px;
+      background: rgba(255, 235, 59, 0.08);
+      border-radius: 8px;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(255, 214, 0, 0); }
-    }
-
-    .highlight-box {
-      border: 3px solid #FFD600;
-      background: rgba(255, 235, 59, 0.08);
-      animation: pulse 2s infinite;
-    }
-
-    /* Trending sidebar */
-    .trending-sidebar {
-      width: 350px;
-      padding: 20px;
-      margin-left: 875px;
-      position: fixed;
-    }
-
-    .trending-box {
-      background: #16181c;
-      border-radius: 16px;
-      padding: 16px;
-    }
-
-    .trending-header {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 16px;
-    }
-
-    .trending-item {
-      padding: 12px 0;
-      border-bottom: 1px solid #2f3336;
-    }
-
-    .trending-item:last-child {
-      border-bottom: none;
-    }
-
-    .trending-category {
-      font-size: 0.8rem;
-      color: #71767b;
-    }
-
-    .trending-topic {
-      font-weight: bold;
-      margin: 4px 0;
-    }
-
-    .trending-posts {
-      font-size: 0.8rem;
-      color: #71767b;
+      50% { box-shadow: 0 0 0 6px rgba(255, 214, 0, 0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- X Header -->
-  <header class="x-header">
-    <div class="x-logo">𝕏</div>
-    <div class="search-box">🔍 Search</div>
-  </header>
-
-  <div class="container">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <div class="nav-item">🏠 Home</div>
-      <div class="nav-item">🔍 Explore</div>
-      <div class="nav-item">🔔 Notifications</div>
-      <div class="nav-item">✉️ Messages</div>
-      <div class="nav-item">📑 Bookmarks</div>
-      <div class="nav-item">👤 Profile</div>
+  <div class="layout">
+    <!-- Left Sidebar -->
+    <nav class="sidebar-left">
+      <div class="x-logo">𝕏</div>
+      <div class="nav-item"><span>🏠</span> Home</div>
+      <div class="nav-item"><span>🔍</span> Explore</div>
+      <div class="nav-item"><span>🔔</span> Notifications</div>
+      <div class="nav-item"><span>✉️</span> Messages</div>
+      <div class="nav-item"><span>📋</span> Grok</div>
+      <div class="nav-item"><span>🔖</span> Bookmarks</div>
+      <div class="nav-item"><span>👤</span> Profile</div>
+      <div class="nav-item"><span>⋯</span> More</div>
+      <button class="post-btn">Post</button>
     </nav>
 
-    <!-- Main Tweet -->
-    <main class="main-content">
-      <div class="page-header">Post</div>
+    <!-- Main Content -->
+    <main class="main">
+      <header class="search-header">
+        <span class="back-arrow">←</span>
+        <input class="search-box" value="cardano" readonly>
+        <span>⋯</span>
+      </header>
 
+      <div class="tabs">
+        <div class="tab active">Top</div>
+        <div class="tab">Latest</div>
+        <div class="tab">People</div>
+        <div class="tab">Media</div>
+        <div class="tab">Lists</div>
+      </div>
+
+      <!-- News Item -->
+      <div class="news-item">
+        <div class="news-text">
+          <div class="news-title">Grayscale ETF Drops Cardano for BNB in Quarterly Rebalance</div>
+          <div class="news-meta">6 hours ago · News · 173 posts</div>
+        </div>
+        <div class="news-logo">RAYSCAL</div>
+      </div>
+
+      <!-- Tweet with highlights -->
       <article class="tweet highlight-box">
         <div class="tweet-header">
-          <div class="avatar">T</div>
-          <div class="user-info">
-            <div class="display-name">
-              Tezzo <span class="verified">✓</span>
+          <div class="avatar"></div>
+          <div class="tweet-content">
+            <div class="user-row">
+              <span class="display-name">Tezzo</span>
+              <span class="verified">✓</span>
+              <span class="username">@Tezzo100x</span>
+              <span class="time">· 19h</span>
             </div>
-            <div class="username">@Tezzo100x · 19h</div>
-          </div>
-        </div>
-
-        <div class="tweet-text">
-          🚨 BREAKING: Harold just hinted that analysis shows <span class="highlight">Cardano is set to hit $100 before March 1st</span>
-        </div>
-
-        <div class="tweet-image">
-          <div class="emulated-image">
-            <div class="harold-placeholder">[Harold Image]</div>
-            <div>
-              <div class="cardano-logo">◈</div>
-              <div class="cardano-text">CARDANO</div>
+            <p class="tweet-text">
+              🚨 BREAKING: Harold just hinted that analysis shows <span class="highlight">Cardano is set to hit $100 before March 1st</span>
+            </p>
+            <div class="tweet-image">
+              <div class="tweet-image-inner">
+                <div class="harold-img"></div>
+                <div class="cardano-side">
+                  <div class="ada-dots">◇◇◇<br>◇◇◇</div>
+                  <div class="ada-text">CARDANO</div>
+                </div>
+              </div>
+            </div>
+            <div class="tweet-actions">
+              <span class="action">💬 150</span>
+              <span class="action">🔁 22</span>
+              <span class="action">❤️ 217</span>
+              <span class="action">📊 3.2K</span>
+              <span class="action">🔖</span>
+              <span class="action">↗</span>
             </div>
           </div>
-        </div>
-
-        <div class="tweet-stats">
-          <span class="stat">💬 150</span>
-          <span class="stat">🔁 22</span>
-          <span class="stat">❤️ 216</span>
-          <span class="stat">📊 3.2K</span>
         </div>
       </article>
     </main>
 
-    <!-- Trending Sidebar -->
-    <aside class="trending-sidebar">
+    <!-- Right Sidebar -->
+    <aside class="sidebar-right">
       <div class="trending-box">
         <div class="trending-header">What's happening</div>
 
-        <div class="trending-item highlight-box" style="border-radius: 8px; padding: 12px; margin: 8px 0;">
-          <div class="trending-category">Business and finance · Trending</div>
+        <div class="trending-item highlight-box">
+          <div class="trending-category">Trending</div>
           <div class="trending-topic highlight">Cardano</div>
           <div class="trending-posts">45.2K posts</div>
         </div>
 
         <div class="trending-item">
-          <div class="trending-category">Crypto · Trending</div>
-          <div class="trending-topic">Grayscale</div>
-          <div class="trending-posts">12.8K posts</div>
+          <div class="trending-category">Fashion & beauty · Trending</div>
+          <div class="trending-topic">Nike</div>
         </div>
 
         <div class="trending-item">
-          <div class="trending-category">Crypto · Trending</div>
-          <div class="trending-topic">#ADA</div>
-          <div class="trending-posts">8.4K posts</div>
+          <div class="trending-category">Trending in United States</div>
+          <div class="trending-topic">Marchy</div>
         </div>
       </div>
     </aside>
