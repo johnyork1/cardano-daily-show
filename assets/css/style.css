@@ -1,0 +1,325 @@
+/* Cardano Daily Show - Recording Aid Styles */
+
+:root {
+  --cardano-blue: #0033AD;
+  --dark-navy: #1A1A2E;
+  --electric-cyan: #00D4FF;
+  --soft-white: #F0F0F5;
+  --signal-green: #00E676;
+  --signal-red: #FF3D00;
+  --highlight-yellow: rgba(255, 235, 59, 0.4);
+  --highlight-border: #FFD600;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--dark-navy);
+  color: var(--soft-white);
+  line-height: 1.6;
+}
+
+/* Master Index Page */
+.master-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.master-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.master-header h1 {
+  font-size: 2.5rem;
+  color: var(--electric-cyan);
+  margin-bottom: 10px;
+}
+
+.master-header p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.episode-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.episode-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cardano-blue);
+}
+
+.episode-card h3 {
+  color: var(--soft-white);
+  margin-bottom: 8px;
+}
+
+.episode-card .date {
+  color: var(--electric-cyan);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.episode-card .topic {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.episode-card a {
+  display: inline-block;
+  background: var(--cardano-blue);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.episode-card a:hover {
+  background: #0044CC;
+}
+
+/* Episode Index Page */
+.episode-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.episode-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.episode-header h1 {
+  color: var(--electric-cyan);
+  margin-bottom: 8px;
+}
+
+.episode-header .topic {
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+.open-all-btn {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 30px;
+  padding: 16px 24px;
+  background: var(--signal-green);
+  color: var(--dark-navy);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.open-all-btn:hover {
+  background: #00C864;
+}
+
+.tab-list {
+  list-style: none;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid var(--cardano-blue);
+}
+
+.tab-item .tab-number {
+  width: 36px;
+  height: 36px;
+  background: var(--cardano-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.tab-item .tab-info {
+  flex-grow: 1;
+}
+
+.tab-item .tab-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.tab-item .tab-highlight {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+}
+
+.tab-item a {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--soft-white);
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.tab-item a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Screenshot Page */
+.screenshot-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.screenshot-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.highlight-overlay {
+  position: absolute;
+  background: var(--highlight-yellow);
+  border: 3px solid var(--highlight-border);
+  border-radius: 4px;
+  pointer-events: none;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* Article Page */
+.article-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.article-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.article-header h1 {
+  font-size: 2rem;
+  color: var(--soft-white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.article-meta {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.article-meta .source {
+  color: var(--electric-cyan);
+}
+
+.article-content {
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+
+.article-content p {
+  margin-bottom: 20px;
+}
+
+.article-content mark,
+.article-content .highlight {
+  background: var(--highlight-yellow);
+  color: var(--soft-white);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--highlight-border);
+}
+
+/* Teleprompter Script Page */
+.script-container {
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 60px 40px;
+  background: #000;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.script-container .screen-cue {
+  display: block;
+  background: var(--cardano-blue);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  margin: 30px auto;
+  max-width: fit-content;
+}
+
+.script-container p {
+  margin-bottom: 40px;
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 20px;
+  color: var(--electric-cyan);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* No episodes message */
+.no-episodes {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.no-episodes p {
+  margin-bottom: 20px;
+}

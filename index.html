@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardano Daily Show - Recording Aids</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="master-container">
+    <header class="master-header">
+      <h1>Cardano Daily Show</h1>
+      <p>Recording aids for daily YouTube episodes</p>
+    </header>
+
+    <div class="episode-grid" id="episode-grid">
+      <!-- Episodes will be listed here -->
+      <!-- Each episode folder should contain an index.html that gets linked -->
+    </div>
+
+    <div class="no-episodes" id="no-episodes" style="display: none;">
+      <p>No episodes yet.</p>
+      <p>Run <code>/yt-pages</code> after <code>/yt-daily</code> to create your first episode.</p>
+    </div>
+  </div>
+
+  <script>
+    // Auto-discover episodes by checking known dates
+    // In production, this would be generated during build
+    const episodes = [
+      // Episodes will be added here by /yt-pages
+      // Format: { date: "2025-02-05", topic: "Cardano TVL Surge", tabs: 5 }
+    ];
+
+    const grid = document.getElementById('episode-grid');
+    const noEpisodes = document.getElementById('no-episodes');
+
+    if (episodes.length === 0) {
+      noEpisodes.style.display = 'block';
+    } else {
+      episodes.forEach(ep => {
+        const card = document.createElement('div');
+        card.className = 'episode-card';
+        card.innerHTML = `
+          <div class="date">${ep.date}</div>
+          <h3>${ep.topic}</h3>
+          <p class="topic">${ep.tabs} recording tabs</p>
+          <a href="episodes/${ep.date}/index.html">Open Episode</a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
