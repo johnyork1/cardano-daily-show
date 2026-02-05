@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Teleprompter | Feb 5</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: #000;
+      color: #fff;
+      font-family: Georgia, serif;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(20,20,20,0.95);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      z-index: 1000;
+      border-top: 1px solid #333;
+    }
+
+    button {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    button:active { background: #444; }
+    button.playing { background: #00d4ff; color: #000; }
+
+    .speed-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .speed-box span { color: #888; font-size: 0.9rem; }
+    input[type="range"] {
+      width: 120px;
+      height: 30px;
+      accent-color: #00d4ff;
+    }
+
+    .reading-line {
+      position: fixed;
+      top: 35%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 10%, #00d4ff 50%, transparent 90%);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 500;
+    }
+
+    .script {
+      padding: 30vh 8vw 50vh;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .line {
+      font-size: 2rem;
+      line-height: 2.4;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .emphasis { color: #FFD700; font-weight: 600; }
+    .stat { color: #00FF88; font-weight: 600; }
+    .pause { color: #555; font-style: italic; font-size: 0.8em; }
+    .cue {
+      color: #00d4ff;
+      font-family: monospace;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 50px 0 30px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="reading-line"></div>
+
+<div class="script">
+  <p class="cue">[TAB 1 - HOSKINSON]</p>
+  <p class="line">Hey everyone, welcome back to <span class="emphasis">Blockchain Basics</span>.</p>
+  <p class="line">Today we've got some important news from Cardano founder <span class="emphasis">Charles Hoskinson</span>, plus a challenge from Galaxy Digital's Mike Novogratz that every Cardano holder should hear.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Let's start with Hoskinson's comments on crypto policy.</p>
+
+  <p class="cue">[SCROLL TO HIGHLIGHT]</p>
+  <p class="line">In a recent interview, Hoskinson called the current administration's approach to crypto <span class="emphasis">"extractive"</span> — meaning it's designed to benefit specific groups rather than the broader industry.</p>
+  <p class="line">His biggest concern? <span class="pause">[beat]</span></p>
+  <p class="line">When you make crypto a <span class="emphasis">partisan issue</span>, you've already lost half the country.</p>
+  <p class="line">Blockchain technology is supposed to be <span class="emphasis">neutral infrastructure</span> — available to everyone regardless of their politics.</p>
+
+  <p class="cue">[TAB 2 - NOVOGRATZ]</p>
+  <p class="line">Now, speaking of challenges for Cardano...</p>
+  <p class="line"><span class="emphasis">Mike Novogratz</span> — CEO of Galaxy Digital — had some pointed words for both XRP and Cardano communities.</p>
+  <p class="line">He basically said: <span class="emphasis">"Prove you're useful."</span></p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Now, before you get defensive — he's making a fair point.</p>
+  <p class="line">Bitcoin has a clear value proposition: <span class="emphasis">store of value</span>. Ethereum has one too: <span class="emphasis">smart contract platform</span>.</p>
+  <p class="line">But what's Cardano's killer app?</p>
+  <p class="line">The good news is — Cardano IS building real utility. TVL is growing. Developer activity is up. Projects like <span class="emphasis">Midnight</span> and <span class="emphasis">Hydra</span> show genuine progress.</p>
+
+  <p class="cue">[TAB 3 - CME FUTURES]</p>
+  <p class="line">Here's some concrete progress on the institutional front.</p>
+  <p class="line"><span class="emphasis">CME Group</span> — the world's leading derivatives marketplace — is launching Cardano futures on <span class="stat">February 9th</span>.</p>
+  <p class="line">This gives institutional investors a <span class="emphasis">regulated way</span> to get exposure to ADA without holding the token.</p>
+  <p class="line">This is exactly the kind of utility proof that Novogratz is talking about.</p>
+
+  <p class="cue">[TAB 4 - X POST]</p>
+  <p class="line">Now... I have to address the elephant in the room.</p>
+  <p class="line">You've probably seen posts like this claiming Cardano will hit <span class="stat">$100</span> by March.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Look — I love the enthusiasm. But let's be real.</p>
+  <p class="line">ADA is currently at <span class="stat">28 cents</span>. Getting to $100 would require a <span class="emphasis">350x</span> increase in less than a month.</p>
+  <p class="line">That's... not how markets work.</p>
+  <p class="line"><span class="emphasis">Focus on fundamentals</span> — adoption metrics, development progress, real-world use cases. Not price predictions from random accounts.</p>
+
+  <p class="cue">[OUTRO]</p>
+  <p class="line">That's it for today's Blockchain Basics.</p>
+  <p class="line">If you found this helpful, smash that <span class="emphasis">like button</span> and <span class="emphasis">subscribe</span> for daily Cardano updates.</p>
+  <p class="line">Drop a comment below — what do you think about Novogratz's utility challenge?</p>
+  <p class="line">See you tomorrow.</p>
+</div>
+
+<div class="controls">
+  <button id="playBtn" onclick="toggle()">▶ PLAY</button>
+  <div class="speed-box">
+    <span>Speed</span>
+    <input type="range" id="speed" min="10" max="80" value="35" oninput="setSpeed(this.value)">
+  </div>
+  <button onclick="bigger()">A+</button>
+  <button onclick="smaller()">A−</button>
+  <button onclick="reset()">↺ TOP</button>
+</div>
+
+<script>
+  let playing = false;
+  let speed = 35;
+  let timer = null;
+  let fontSize = 2;
+
+  function toggle() {
+    playing = !playing;
+    const btn = document.getElementById('playBtn');
+    if (playing) {
+      btn.textContent = '⏸ PAUSE';
+      btn.classList.add('playing');
+      run();
+    } else {
+      btn.textContent = '▶ PLAY';
+      btn.classList.remove('playing');
+      stop();
+    }
+  }
+
+  function run() {
+    stop();
+    timer = setInterval(function() {
+      window.scrollBy(0, 1);
+    }, 81 - speed);
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  function setSpeed(v) {
+    speed = parseInt(v);
+    if (playing) run();
+  }
+
+  function bigger() {
+    fontSize = Math.min(4, fontSize + 0.3);
+    document.querySelectorAll('.line').forEach(function(el) {
+      el.style.fontSize = fontSize + 'rem';
+    });
+  }
+
+  function smaller() {
+    fontSize = Math.max(1, fontSize - 0.3);
+    document.querySelectorAll('.line').forEach(function(el) {
+      el.style.fontSize = fontSize + 'rem';
+    });
+  }
+
+  function reset() {
+    window.scrollTo(0, 0);
+  }
+</script>
+
+</body>
+</html>
