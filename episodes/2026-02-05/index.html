@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Episode: Feb 5, 2026 | Blockchain Basics</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a14; color: #e0e0e0; line-height: 1.6; }
+
+    .nav-tabs {
+      position: sticky;
+      top: 0;
+      background: #0a0a14;
+      border-bottom: 1px solid #222;
+      padding: 0 20px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .nav-tab {
+      padding: 16px 24px;
+      cursor: pointer;
+      color: #666;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-tab:hover { color: #aaa; }
+    .nav-tab.active { color: #00d4ff; border-bottom-color: #00d4ff; }
+
+    .section { display: none; padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+    .section.active { display: block; }
+
+    .header { text-align: center; padding: 30px 0 40px; border-bottom: 1px solid #222; margin-bottom: 40px; }
+    .logo { font-size: 2.5rem; color: #00d4ff; }
+    .brand { font-size: 1rem; color: #666; letter-spacing: 4px; margin: 8px 0; }
+    .date { font-size: 1.4rem; font-weight: 600; }
+    .topic { color: #888; margin-top: 8px; }
+
+    .tabs-grid { display: grid; gap: 12px; margin-bottom: 40px; }
+    .tab-card {
+      background: #12121c;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+    .tab-card:hover { border-color: #00d4ff44; background: #16162a; }
+    .tab-num { width: 50px; height: 50px; background: #00d4ff22; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.3rem; color: #00d4ff; }
+    .tab-source { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+    .tab-title { font-weight: 600; margin-top: 4px; }
+    .tab-link { background: #00d4ff; color: #000; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    .tab-link:hover { background: #00b8e6; }
+
+    .summary-block { background: #12121c; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #222; }
+    .summary-title { font-size: 1.1rem; font-weight: 700; color: #00d4ff; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .key-points { list-style: none; }
+    .key-points li { padding: 10px 0; padding-left: 20px; position: relative; border-bottom: 1px solid #1a1a2a; }
+    .key-points li:last-child { border-bottom: none; }
+    .key-points li::before { content: '▸'; position: absolute; left: 0; color: #00d4ff; }
+
+    .talking-point { background: #0a1a2a; border-left: 4px solid #00d4ff; padding: 16px 20px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+    .talking-point strong { color: #00d4ff; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+    .vocab-card { background: #0a0a14; border: 1px solid #222; border-radius: 8px; padding: 14px; }
+    .vocab-term { font-weight: 700; color: #FFD700; margin-bottom: 4px; }
+    .vocab-def { font-size: 0.9rem; color: #888; }
+
+    .back-link { display: block; text-align: center; padding: 30px; color: #666; text-decoration: none; border-top: 1px solid #222; margin-top: 40px; }
+    .back-link:hover { color: #00d4ff; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-tabs">
+    <div class="nav-tab active" data-section="tabs" onclick="showSection('tabs')">📂 Tabs</div>
+    <div class="nav-tab" data-section="summary" onclick="showSection('summary')">📚 Summary</div>
+    <a href="teleprompter.html" class="nav-tab" style="text-decoration:none;">🎬 Script</a>
+  </nav>
+
+  <div id="tabs" class="section active">
+    <header class="header">
+      <div class="logo">B·B</div>
+      <div class="brand">BLOCKCHAIN BASICS</div>
+      <div class="date">February 5, 2026</div>
+      <div class="topic">Bitcoin Crashes Below $73K — Michael Burry Warns of Cascading Liquidations</div>
+    </header>
+
+    <div class="tabs-grid">
+      <div class="tab-card">
+        <div class="tab-num">1</div>
+        <div class="tab-info">
+          <div class="tab-source">CNBC · Markets</div>
+          <div class="tab-title">Bitcoin briefly breaks below $73,000 to lowest since November 2024</div>
+        </div>
+        <a href="tabs/01-cnbc-bitcoin.html" target="_blank" class="tab-link">Open</a>
+      </div>
+
+      <div class="tab-card">
+        <div class="tab-num">2</div>
+        <div class="tab-info">
+          <div class="tab-source">CoinDesk · Analysis</div>
+          <div class="tab-title">Michael Burry warns Bitcoin crash could trigger 'cascading liquidations'</div>
+        </div>
+        <a href="tabs/02-burry-warning.html" target="_blank" class="tab-link">Open</a>
+      </div>
+
+      <div class="tab-card">
+        <div class="tab-num">3</div>
+        <div class="tab-info">
+          <div class="tab-source">The Block · ETF Flows</div>
+          <div class="tab-title">Bitcoin ETF outflows hit $818M in single day, breaking inflow streak</div>
+        </div>
+        <a href="tabs/03-etf-outflows.html" target="_blank" class="tab-link">Open</a>
+      </div>
+
+      <div class="tab-card">
+        <div class="tab-num">4</div>
+        <div class="tab-info">
+          <div class="tab-source">CryptoNews · Sentiment</div>
+          <div class="tab-title">Fear & Greed Index plunges to 14 — lowest since November 2025</div>
+        </div>
+        <a href="tabs/04-fear-greed.html" target="_blank" class="tab-link">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="summary" class="section">
+    <div class="summary-block">
+      <div class="summary-title">📰 Today's Headlines</div>
+      <ul class="key-points">
+        <li><strong>Bitcoin Crashes:</strong> BTC fell below $73,000 for the first time since November 2024, now down 40% from October's all-time high of $126,080</li>
+        <li><strong>Michael Burry Warning:</strong> The "Big Short" investor warns Bitcoin's deep integration into leveraged structures creates systemic risk for cascading liquidations</li>
+        <li><strong>ETF Exodus:</strong> Bitcoin spot ETFs saw $818M in outflows on Jan 29 — the largest single-day outflow since launch. BlackRock led with $318M</li>
+        <li><strong>Extreme Fear:</strong> Fear & Greed Index at 14, lowest since November 2025. Altcoins hit even harder — ETH down 26% YTD</li>
+      </ul>
+    </div>
+
+    <div class="summary-block">
+      <div class="summary-title">💡 Key Talking Points</div>
+      <div class="talking-point">
+        <strong>On the Crash:</strong> "This isn't a normal pullback — Bitcoin has erased 40% of its value since October. But perspective matters: we've seen 80%+ drawdowns before. The question is whether institutional involvement changes the dynamic this time."
+      </div>
+      <div class="talking-point">
+        <strong>On Burry's Warning:</strong> "When the guy who predicted 2008 says he's worried, people listen. His concern is that Bitcoin is now embedded in leveraged products — corporate balance sheets, ETFs, margin platforms. A cascade becomes everyone's problem."
+      </div>
+      <div class="talking-point">
+        <strong>On ETF Outflows:</strong> "The institutional money that poured in during 2024-2025 is now flowing out. This is risk-off behavior, not necessarily loss of faith. When macro uncertainty rises, Bitcoin gets sold like any risk asset."
+      </div>
+      <div class="talking-point">
+        <strong>On Extreme Fear:</strong> "A Fear & Greed reading of 14 historically signals opportunity — but it can stay low for months. The 2022 bear market saw readings under 25 for three straight months."
+      </div>
+    </div>
+
+    <div class="summary-block">
+      <div class="summary-title">📚 Vocabulary</div>
+      <div class="vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-term">Cascading Liquidations</div>
+          <div class="vocab-def">When forced selling triggers more forced selling — a chain reaction of margin calls and liquidations</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-term">Fear & Greed Index</div>
+          <div class="vocab-def">Sentiment indicator measuring market emotion on a 0-100 scale. Below 25 = Extreme Fear</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-term">Spot ETF</div>
+          <div class="vocab-def">Exchange-traded fund that holds actual Bitcoin, allowing traditional investors exposure without direct custody</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-term">Risk-Off</div>
+          <div class="vocab-def">Market environment where investors sell risky assets (stocks, crypto) for safe havens (bonds, cash)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="../../index.html" class="back-link">← Back to All Episodes</a>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelector(`[data-section="${id}"]`).classList.add('active');
+      window.location.hash = id;
+    }
+
+    function loadFromHash() {
+      const hash = window.location.hash.slice(1);
+      if (['tabs', 'summary'].includes(hash)) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(hash).classList.add('active');
+        document.querySelector(`[data-section="${hash}"]`).classList.add('active');
+      }
+    }
+
+    window.addEventListener('hashchange', loadFromHash);
+    window.addEventListener('DOMContentLoaded', loadFromHash);
+  </script>
+</body>
+</html>

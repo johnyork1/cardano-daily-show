@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Teleprompter | Feb 5, 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: #000;
+      color: #fff;
+      font-family: Georgia, serif;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(20,20,20,0.95);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      z-index: 1000;
+      border-top: 1px solid #333;
+    }
+
+    button {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    button:active { background: #444; }
+    button.playing { background: #00d4ff; color: #000; }
+
+    .speed-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .speed-box span { color: #888; font-size: 0.9rem; }
+    input[type="range"] {
+      width: 120px;
+      height: 30px;
+      accent-color: #00d4ff;
+    }
+
+    .reading-line {
+      position: fixed;
+      top: 35%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 10%, #00d4ff 50%, transparent 90%);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 500;
+    }
+
+    .script {
+      padding: 30vh 8vw 50vh;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .line {
+      font-size: 2rem;
+      line-height: 2.4;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .emphasis { color: #FFD700; font-weight: 600; }
+    .stat { color: #00FF88; font-weight: 600; }
+    .pause { color: #555; font-style: italic; font-size: 0.8em; }
+    .cue {
+      color: #00d4ff;
+      font-family: monospace;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 50px 0 30px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="reading-line"></div>
+
+<div class="script">
+  <p class="cue">[INTRO]</p>
+  <p class="line">Hey everyone, welcome to <span class="emphasis">Blockchain Basics</span>.</p>
+  <p class="line">If you woke up today and checked your portfolio — yeah, I know. It hurts.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Let's talk about what's happening.</p>
+
+  <p class="cue">[TAB 1 - CNBC BITCOIN]</p>
+  <p class="line">Bitcoin just crashed below <span class="stat">$73,000</span> — its lowest level since <span class="emphasis">November 2024</span>.</p>
+  <p class="line">To put that in perspective: we hit an all-time high of <span class="stat">$126,000</span> just four months ago.</p>
+  <p class="line">That's a <span class="stat">40% drop</span> from the peak.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Now — is this the end of crypto? No. We've seen <span class="emphasis">80% drawdowns</span> before.</p>
+  <p class="line">But this time feels different. And there's a reason for that.</p>
+
+  <p class="cue">[TAB 2 - BURRY WARNING]</p>
+  <p class="line">Michael Burry — the guy who predicted the <span class="emphasis">2008 financial crisis</span> — is sounding the alarm.</p>
+  <p class="line">You might know him from "The Big Short." He made $700 million betting against subprime mortgages.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">His warning? Bitcoin is now <span class="emphasis">deeply embedded</span> into the financial system.</p>
+  <p class="line">We're talking corporate balance sheets. ETF derivatives. Margin platforms.</p>
+  <p class="line">When Bitcoin drops, it can trigger <span class="emphasis">cascading liquidations</span> — forced selling that causes more forced selling.</p>
+  <p class="line">A vicious cycle.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Here's the scary stat: <span class="stat">44% of Bitcoin's supply</span> is now underwater.</p>
+  <p class="line">That means almost half of all holders are sitting on losses.</p>
+
+  <p class="cue">[TAB 3 - ETF OUTFLOWS]</p>
+  <p class="line">Remember all that institutional money that flooded into Bitcoin ETFs last year?</p>
+  <p class="line">It's flowing OUT.</p>
+  <p class="line"><span class="stat">$818 million</span> left Bitcoin ETFs in a single day last week — the biggest outflow since they launched.</p>
+  <p class="line">BlackRock's fund led the exodus with <span class="stat">$318 million</span> in redemptions.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Now, this doesn't mean institutions have lost faith in crypto.</p>
+  <p class="line">This is <span class="emphasis">risk-off behavior</span>. When macro uncertainty rises, Bitcoin gets sold like any other risk asset.</p>
+  <p class="line">It's being treated like a high-beta tech stock.</p>
+
+  <p class="cue">[TAB 4 - FEAR & GREED]</p>
+  <p class="line">How scared is the market right now?</p>
+  <p class="line">The Fear & Greed Index just hit <span class="stat">14</span>.</p>
+  <p class="line">That's <span class="emphasis">Extreme Fear</span>. The lowest reading since November 2025.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">Now, historically, extreme fear has been a <span class="emphasis">buying signal</span>.</p>
+  <p class="line">But here's the catch — fear can stay extreme for months. During the 2022 bear market, the index stayed below 25 for <span class="emphasis">three straight months</span>.</p>
+  <p class="line">So don't try to catch a falling knife based on sentiment alone.</p>
+
+  <p class="cue">[ALTCOIN IMPACT - BRIEF]</p>
+  <p class="line">And it's not just Bitcoin.</p>
+  <p class="line">Ethereum is down <span class="stat">26%</span> year-to-date. Solana, Cardano, everything is bleeding.</p>
+  <p class="line">When Bitcoin catches a cold, altcoins get pneumonia.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">But if you're a long-term holder — and I am — this is when you watch fundamentals, not prices.</p>
+  <p class="line">The projects that keep building through bear markets are the ones that thrive in the next cycle.</p>
+
+  <p class="cue">[OUTRO]</p>
+  <p class="line">So what should you do?</p>
+  <p class="line"><span class="emphasis">Don't panic sell.</span> Don't over-leverage. And definitely don't invest money you can't afford to lose.</p>
+  <p class="line">This is crypto. Volatility is the price of admission.</p>
+  <p class="line"><span class="pause">[beat]</span></p>
+  <p class="line">That's it for today's Blockchain Basics.</p>
+  <p class="line">If this helped you understand what's happening, smash that <span class="emphasis">like button</span> and <span class="emphasis">subscribe</span>.</p>
+  <p class="line">Drop a comment — are you buying this dip or waiting for lower?</p>
+  <p class="line">See you tomorrow.</p>
+</div>
+
+<div class="controls">
+  <button id="playBtn" onclick="toggle()">▶ PLAY</button>
+  <div class="speed-box">
+    <span>Speed</span>
+    <input type="range" id="speed" min="10" max="80" value="35" oninput="setSpeed(this.value)">
+  </div>
+  <button onclick="bigger()">A+</button>
+  <button onclick="smaller()">A−</button>
+  <button onclick="reset()">↺ TOP</button>
+</div>
+
+<script>
+  let playing = false;
+  let speed = 35;
+  let timer = null;
+  let fontSize = 2;
+
+  function toggle() {
+    playing = !playing;
+    const btn = document.getElementById('playBtn');
+    if (playing) {
+      btn.textContent = '⏸ PAUSE';
+      btn.classList.add('playing');
+      run();
+    } else {
+      btn.textContent = '▶ PLAY';
+      btn.classList.remove('playing');
+      stop();
+    }
+  }
+
+  function run() {
+    stop();
+    timer = setInterval(function() {
+      window.scrollBy(0, 1);
+    }, 81 - speed);
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  function setSpeed(v) {
+    speed = parseInt(v);
+    if (playing) run();
+  }
+
+  function bigger() {
+    fontSize = Math.min(4, fontSize + 0.3);
+    document.querySelectorAll('.line').forEach(function(el) {
+      el.style.fontSize = fontSize + 'rem';
+    });
+  }
+
+  function smaller() {
+    fontSize = Math.max(1, fontSize - 0.3);
+    document.querySelectorAll('.line').forEach(function(el) {
+      el.style.fontSize = fontSize + 'rem';
+    });
+  }
+
+  function reset() {
+    window.scrollTo(0, 0);
+  }
+</script>
+
+</body>
+</html>
