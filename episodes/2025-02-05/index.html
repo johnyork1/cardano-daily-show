@@ -79,11 +79,61 @@
     .vocab-def { font-size: 0.9rem; color: #888; }
 
     /* SCRIPT SECTION */
-    .script-controls { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222; }
-    .script-controls button { background: #222; color: #fff; border: 1px solid #333; padding: 8px 20px; border-radius: 6px; cursor: pointer; }
+    .script-controls { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222; flex-wrap: wrap; }
+    .script-controls button { background: #222; color: #fff; border: 1px solid #333; padding: 8px 20px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
     .script-controls button:hover { background: #333; }
+    .script-controls button.active { background: #00d4ff; color: #000; border-color: #00d4ff; }
+    .speed-control { display: flex; align-items: center; gap: 8px; }
+    .speed-control input { width: 100px; accent-color: #00d4ff; }
+    .speed-label { color: #666; font-size: 0.85rem; min-width: 80px; }
 
+    .script-content { scroll-behavior: smooth; }
     .script-block { margin-bottom: 50px; }
+
+    /* TELEPROMPTER FULLSCREEN MODE */
+    body.teleprompter-mode { background: #000; }
+    body.teleprompter-mode .nav-tabs,
+    body.teleprompter-mode .back-link,
+    body.teleprompter-mode .screen-cue { display: none; }
+    body.teleprompter-mode #script {
+      display: block;
+      max-width: 100%;
+      padding: 15vh 10vw;
+    }
+    body.teleprompter-mode .script-controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.9);
+      padding: 15px;
+      margin: 0;
+      border-top: 1px solid #333;
+      border-bottom: none;
+      z-index: 1000;
+    }
+    body.teleprompter-mode .script-text {
+      font-size: 2.2rem;
+      line-height: 2.2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    body.teleprompter-mode .script-block { margin-bottom: 80px; }
+
+    /* Reading line indicator */
+    body.teleprompter-mode::before {
+      content: '';
+      position: fixed;
+      top: 38%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+      opacity: 0.5;
+      z-index: 999;
+      pointer-events: none;
+    }
     .screen-cue { background: #00d4ff11; border-left: 4px solid #00d4ff; padding: 10px 16px; margin: 20px 0; font-size: 0.85rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px; font-family: monospace; }
     .script-text { font-family: Georgia, serif; font-size: 1.4rem; line-height: 2; margin: 16px 0; }
     .emphasis { color: #FFD700; font-weight: 600; }
@@ -202,11 +252,17 @@
   <!-- SCRIPT SECTION -->
   <div id="script" class="section">
     <div class="script-controls">
-      <button onclick="changeFontSize(-0.15)">A−</button>
-      <span style="color:#666; padding: 8px;">Font Size</span>
-      <button onclick="changeFontSize(0.15)">A+</button>
+      <button id="playBtn" onclick="toggleScroll()">▶ Play</button>
+      <div class="speed-control">
+        <span class="speed-label">Speed: <span id="speedValue">30</span></span>
+        <input type="range" id="speedSlider" min="10" max="100" value="30" oninput="updateSpeed(this.value)">
+      </div>
+      <button onclick="changeFontSize(-0.2)">A−</button>
+      <button onclick="changeFontSize(0.2)">A+</button>
+      <button id="fullscreenBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
     </div>
 
+    <div class="script-content">
     <div class="script-block">
       <div class="screen-cue">[SCREEN: Tab 1 - Hoskinson Article]</div>
       <p class="script-text">Hey everyone, welcome back to <span class="emphasis">Blockchain Basics</span>.</p>
@@ -261,6 +317,7 @@
       <p class="script-text">Drop a comment below — what do you think about Novogratz's utility challenge?</p>
       <p class="script-text">See you tomorrow.</p>
     </div>
+    </div><!-- end script-content -->
   </div>
 
   <a href="../../index.html" class="back-link">← Back to All Episodes</a>
@@ -276,11 +333,85 @@
 
     let scriptFontSize = 1.4;
     function changeFontSize(delta) {
-      scriptFontSize = Math.max(1, Math.min(2.5, scriptFontSize + delta));
+      scriptFontSize = Math.max(0.8, Math.min(4, scriptFontSize + delta));
       document.querySelectorAll('.script-text').forEach(el => {
         el.style.fontSize = scriptFontSize + 'rem';
       });
     }
+
+    // TELEPROMPTER FUNCTIONALITY
+    let isScrolling = false;
+    let scrollSpeed = 30;
+    let scrollInterval = null;
+
+    function toggleScroll() {
+      isScrolling = !isScrolling;
+      const btn = document.getElementById('playBtn');
+      if (isScrolling) {
+        btn.textContent = '⏸ Pause';
+        btn.classList.add('active');
+        startScrolling();
+      } else {
+        btn.textContent = '▶ Play';
+        btn.classList.remove('active');
+        stopScrolling();
+      }
+    }
+
+    function startScrolling() {
+      stopScrolling();
+      scrollInterval = setInterval(() => {
+        window.scrollBy(0, 1);
+      }, 101 - scrollSpeed); // Higher speed = shorter interval
+    }
+
+    function stopScrolling() {
+      if (scrollInterval) {
+        clearInterval(scrollInterval);
+        scrollInterval = null;
+      }
+    }
+
+    function updateSpeed(val) {
+      scrollSpeed = parseInt(val);
+      document.getElementById('speedValue').textContent = val;
+      if (isScrolling) {
+        startScrolling(); // Restart with new speed
+      }
+    }
+
+    function toggleFullscreen() {
+      document.body.classList.toggle('teleprompter-mode');
+      const btn = document.getElementById('fullscreenBtn');
+      if (document.body.classList.contains('teleprompter-mode')) {
+        btn.textContent = '✕ Exit';
+        btn.classList.add('active');
+        window.scrollTo(0, 0);
+      } else {
+        btn.textContent = '⛶ Fullscreen';
+        btn.classList.remove('active');
+      }
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleScroll();
+      } else if (e.code === 'Escape') {
+        if (document.body.classList.contains('teleprompter-mode')) {
+          toggleFullscreen();
+        }
+      } else if (e.code === 'ArrowUp') {
+        e.preventDefault();
+        updateSpeed(Math.min(100, scrollSpeed + 5));
+        document.getElementById('speedSlider').value = scrollSpeed;
+      } else if (e.code === 'ArrowDown') {
+        e.preventDefault();
+        updateSpeed(Math.max(10, scrollSpeed - 5));
+        document.getElementById('speedSlider').value = scrollSpeed;
+      }
+    });
 
     // Handle direct links to sections (e.g., index.html#script)
     function loadFromHash() {
